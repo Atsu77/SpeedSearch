@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_08_18_073629) do
   create_table "histories", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "url", null: false
-    t.string "title", null: false
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_histories_on_user_id"
