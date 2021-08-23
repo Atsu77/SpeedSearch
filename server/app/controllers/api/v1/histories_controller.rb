@@ -27,10 +27,12 @@ class Api::V1::HistoriesController < ApplicationController
     url = history_params[:url]
     title = Scrape.page_title_scrape(url)
     history = current_api_v1_user.histories.build(url: url, title: title)
-    tag_list = history_params[:tag_name].split(',')
-    if history.save
+    if history_params[:tag_name]
+      tag_list = history_params[:tag_name].split(',')
       history.save_tag(tag_list)
-      render json: { status: :create, history: history, tag_list: tag_list}
+    end
+    if history.save
+      render json: { status: :create, history: history } 
     else
       render json: { status: 500 }
     end
